@@ -1,0 +1,201 @@
+{% extends "base.html" %}
+
+{% block title %}
+Marks Management
+{% endblock %}
+
+{% block content %}
+
+<h1 class="page-title">
+    Marks Management
+</h1>
+
+<div class="row">
+
+    <div class="col-lg-4">
+
+        <div class="glass-card">
+
+            <h4 class="mb-4">
+                Add Marks
+            </h4>
+
+            <form method="POST">
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Student
+                    </label>
+
+                    <select
+                        name="student_id"
+                        class="form-select"
+                        required>
+
+                        {% for student in students %}
+
+                        <option value="{{ student[0] }}">
+                            {{ student[2] }}
+                        </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Subject
+                    </label>
+
+                    <input
+                        type="text"
+                        name="subject"
+                        class="form-control"
+                        placeholder="e.g. DBMS"
+                        required>
+
+                </div>
+
+                <div class="mb-4">
+
+                    <label class="form-label">
+                        Marks
+                    </label>
+
+                    <input
+                        type="number"
+                        name="marks"
+                        class="form-control"
+                        min="0"
+                        max="100"
+                        required>
+
+                </div>
+
+                <button
+                    type="submit"
+                    class="btn btn-success w-100">
+
+                    Save Marks
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <div class="col-lg-8">
+
+        <div class="glass-card">
+
+            <div class="d-flex justify-content-between align-items-center mb-4">
+
+                <h4>
+                    Academic Records
+                </h4>
+
+                <span class="badge bg-primary">
+                    Student Marks
+                </span>
+
+            </div>
+
+            <div class="table-responsive">
+
+    <table class="table">
+
+        <thead>
+
+            <tr>
+
+                <th>Student</th>
+
+                <th>Subject</th>
+
+                <th>Marks</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+        {% for mark in recent_marks %}
+
+            <tr>
+
+                <td>
+                    {{ mark[0] }}
+                </td>
+
+                <td>
+
+                    <span class="badge bg-secondary">
+
+                        {{ mark[1] }}
+
+                    </span>
+
+                </td>
+
+                <td>
+
+                    {% if mark[2] >= 85 %}
+
+                        <span class="badge bg-success">
+
+                            {{ mark[2] }}
+
+                        </span>
+
+                    {% elif mark[2] >= 70 %}
+
+                        <span class="badge bg-primary">
+
+                            {{ mark[2] }}
+
+                        </span>
+
+                    {% elif mark[2] >= 50 %}
+
+                        <span class="badge bg-warning">
+
+                            {{ mark[2] }}
+
+                        </span>
+
+                    {% else %}
+
+                        <span class="badge bg-danger">
+
+                            {{ mark[2] }}
+
+                        </span>
+
+                    {% endif %}
+
+                </td>
+
+            </tr>
+
+        {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

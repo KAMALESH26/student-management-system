@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block title %}
+Login
+{% endblock %}
+
+{% block login_content %}
+
+<div class="login-card">
+
+    <div class="text-center mb-4">
+
+        <h1 class="mb-2">
+            🎓
+        </h1>
+
+        <h2>
+            Student ERP
+        </h2>
+
+        <p class="text-secondary">
+            Academic Management System
+        </p>
+
+    </div>
+
+    <form method="POST">
+
+        <div class="mb-3">
+
+            <label class="form-label">
+                Username
+            </label>
+
+            <input
+                type="text"
+                name="username"
+                class="form-control"
+                required>
+
+        </div>
+
+        <div class="mb-4">
+
+            <label class="form-label">
+                Password
+            </label>
+
+            <input
+                type="password"
+                name="password"
+                class="form-control"
+                required>
+
+        </div>
+
+        <button
+            type="submit"
+            class="btn btn-primary w-100">
+
+            Login
+
+        </button>
+
+    </form>
+
+    <hr>
+
+    <div class="text-center">
+
+        <small class="text-secondary">
+            Student Management System
+        </small>
+
+    </div>
+
+</div>
+
+{% endblock %}

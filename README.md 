@@ -1,0 +1,281 @@
+# 🎓 Student ERP System
+
+A modern Student Management System built using Flask, MySQL, Bootstrap, Chart.js, and Python. The application helps educational institutions manage student records, attendance, marks, academic analytics, and PDF report generation through a clean and responsive dashboard.
+
+---
+
+## 📌 Features
+
+### 🔐 Authentication
+
+* Secure login system
+* Session-based authentication
+* Protected routes
+* Logout functionality
+
+### 👨‍🎓 Student Management
+
+* Add students
+* Edit student information
+* Delete students
+* Search students
+* Student profile page
+
+### 📅 Attendance Management
+
+* Record attendance
+* Track Present/Absent status
+* Attendance analytics
+* Attendance percentage calculation
+* Attendance reports
+
+### 📝 Marks Management
+
+* Add subject-wise marks
+* Academic record tracking
+* Recent marks display
+* Marks analytics dashboard
+
+### 📊 Analytics Dashboard
+
+* Total Students
+* Total Departments
+* Final Year Students
+* Average Attendance
+* Average Marks
+* Department Distribution Chart
+* Top Student Performance Chart
+
+### 🏆 Results Analytics
+
+* Student leaderboard
+* Top scorer identification
+* Class average calculation
+* Student performance ranking
+
+### 👤 Student Profile
+
+* Personal information
+* Attendance statistics
+* Subject-wise marks
+* Academic performance charts
+* Attendance charts
+
+### 📄 PDF Report Generation
+
+* Download student reports
+* Subject-wise marks summary
+* Student information export
+
+### 🎨 Modern User Interface
+
+* Dark theme design
+* Responsive layout
+* Sidebar navigation
+* Interactive charts
+* Professional dashboard cards
+
+---
+
+## 🛠️ Technology Stack
+
+### Backend
+
+* Python
+* Flask
+* PyMySQL
+
+### Database
+
+* MySQL / MariaDB
+
+### Frontend
+
+* HTML5
+* CSS3
+* Bootstrap 5
+* Jinja2
+
+### Visualization
+
+* Chart.js
+
+### Reporting
+
+* ReportLab
+
+---
+
+## 📂 Project Structure
+
+```text
+StudentManagementSystem/
+
+├── app.py
+├── requirements.txt
+├── README.md
+
+├── templates/
+│   ├── base.html
+│   ├── login.html
+│   ├── students.html
+│   ├── add_student.html
+│   ├── edit_student.html
+│   ├── attendance.html
+│   ├── attendance_report.html
+│   ├── marks.html
+│   ├── marks_report.html
+│   ├── results.html
+│   └── student_profile.html
+
+├── static/
+│   └── css/
+│       └── style.css
+
+├── screenshots/
+
+└── venv/
+```
+
+---
+
+## 📸 Screenshots
+
+### Login Page
+
+Add screenshot here.
+
+### Dashboard
+
+Add screenshot here.
+
+### Attendance Module
+
+Add screenshot here.
+
+### Marks Analytics
+
+Add screenshot here.
+
+### Student Profile
+
+Add screenshot here.
+
+### PDF Report
+
+Add screenshot here.
+
+---
+
+## ⚙️ Installation
+
+### Clone Repository
+
+```bash
+git clone https://github.com/yourusername/student-management-system.git
+cd student-management-system
+```
+
+### Create Virtual Environment
+
+```bash
+python -m venv venv
+```
+
+### Activate Virtual Environment
+
+Linux / macOS:
+
+```bash
+source venv/bin/activate
+```
+
+Windows:
+
+```bash
+venv\Scripts\activate
+```
+
+### Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### Configure Database
+
+Create MySQL database:
+
+```sql
+CREATE DATABASE student_management;
+```
+
+Import your tables:
+
+```sql
+students
+attendance
+marks
+users
+```
+
+Update database credentials inside:
+
+```python
+app.py
+```
+
+```python
+host="localhost"
+user="sms_user"
+password="sms123"
+database="student_management"
+```
+
+### Run Application
+
+```bash
+python app.py
+```
+
+Open:
+
+```text
+http://127.0.0.1:5000
+```
+
+---
+
+## 🚀 Future Enhancements
+
+* Email notifications
+* Student performance prediction using AI
+* Attendance alerts
+* CSV export
+* Advanced PDF reports
+* Role-based access control
+* Mobile application integration
+
+---
+
+## 🎯 Learning Outcomes
+
+This project demonstrates:
+
+* Full Stack Web Development
+* Flask Application Development
+* Database Design and Management
+* Authentication and Session Handling
+* CRUD Operations
+* Data Visualization
+* PDF Generation
+* Responsive UI Design
+* Analytics Dashboard Development
+
+---
+
+## 👨‍💻 Author
+
+Kamalesh
+
+Student ERP System developed as a portfolio project using Flask and MySQL.

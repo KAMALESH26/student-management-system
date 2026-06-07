@@ -1,0 +1,183 @@
+{% extends "base.html" %}
+
+{% block title %}
+Attendance Management
+{% endblock %}
+
+{% block content %}
+
+<h1 class="page-title">
+    Attendance Management
+</h1>
+
+<div class="row">
+
+    <div class="col-lg-4">
+
+        <div class="glass-card">
+
+            <h4 class="mb-4">
+                Mark Attendance
+            </h4>
+
+            <form method="POST">
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Student
+                    </label>
+
+                    <select
+                        name="student_id"
+                        class="form-select"
+                        required>
+
+                        {% for student in students %}
+
+                        <option value="{{ student[0] }}">
+                            {{ student[2] }}
+                        </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Date
+                    </label>
+
+                    <input
+                        type="date"
+                        name="attendance_date"
+                        class="form-control"
+                        required>
+
+                </div>
+
+                <div class="mb-4">
+
+                    <label class="form-label">
+                        Status
+                    </label>
+
+                    <select
+                        name="status"
+                        class="form-select">
+
+                        <option value="Present">
+                            Present
+                        </option>
+
+                        <option value="Absent">
+                            Absent
+                        </option>
+
+                    </select>
+
+                </div>
+
+                <button
+                    type="submit"
+                    class="btn btn-success w-100">
+
+                    Save Attendance
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <div class="col-lg-8">
+
+        <div class="glass-card">
+
+            <div class="d-flex justify-content-between align-items-center mb-4">
+
+                <h4>
+                    Attendance Records
+                </h4>
+
+                <span class="badge bg-primary">
+
+                    {{ attendance_records|length }}
+                    Records
+
+                </span>
+
+            </div>
+
+            <div class="table-responsive">
+
+                <table class="table align-middle">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Student</th>
+
+                            <th>Date</th>
+
+                            <th>Status</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                    {% for record in attendance_records %}
+
+                        <tr>
+
+                            <td>
+                                {{ record[0] }}
+                            </td>
+
+                            <td>
+                                {{ record[1] }}
+                            </td>
+
+                            <td>
+
+                                {% if record[2] == "Present" %}
+
+                                    <span class="badge bg-success">
+                                        Present
+                                    </span>
+
+                                {% else %}
+
+                                    <span class="badge bg-danger">
+                                        Absent
+                                    </span>
+
+                                {% endif %}
+
+                            </td>
+
+                        </tr>
+
+                    {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

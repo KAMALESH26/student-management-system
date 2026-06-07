@@ -1,0 +1,174 @@
+{% extends "base.html" %}
+
+{% block title %}
+Results Analytics
+{% endblock %}
+
+{% block content %}
+
+<h1 class="page-title">
+    Results Analytics
+</h1>
+
+<div class="dashboard-grid">
+
+    <div class="stat-card">
+
+        <h5>
+            🏆 Top Scorer
+        </h5>
+
+        <h2>
+
+            {% if top_scorer %}
+                {{ top_scorer[0] }}
+            {% else %}
+                N/A
+            {% endif %}
+
+        </h2>
+
+    </div>
+
+    <div class="stat-card">
+
+        <h5>
+            📊 Class Average
+        </h5>
+
+        <h2>
+            {{ class_average }}
+        </h2>
+
+    </div>
+
+    <div class="stat-card">
+
+        <h5>
+            👥 Students Evaluated
+        </h5>
+
+        <h2>
+            {{ students_evaluated }}
+        </h2>
+
+    </div>
+
+</div>
+
+<div class="glass-card">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <h4>
+            Student Ranking
+        </h4>
+
+        <span class="badge bg-primary">
+
+            {{ students_evaluated }}
+            Students
+
+        </span>
+
+    </div>
+
+    <div class="table-responsive">
+
+        <table class="table align-middle">
+
+            <thead>
+
+                <tr>
+
+                    <th>Rank</th>
+
+                    <th>Student</th>
+
+                    <th>Average Marks</th>
+
+                    <th>Status</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+            {% for row in results %}
+
+                <tr>
+
+                    <td>
+
+                        {% if loop.index == 1 %}
+
+                            🥇
+
+                        {% elif loop.index == 2 %}
+
+                            🥈
+
+                        {% elif loop.index == 3 %}
+
+                            🥉
+
+                        {% else %}
+
+                            #{{ loop.index }}
+
+                        {% endif %}
+
+                    </td>
+
+                    <td>
+                        {{ row[0] }}
+                    </td>
+
+                    <td>
+                        {{ row[1] }}
+                    </td>
+
+                    <td>
+
+                        {% if row[1] >= 85 %}
+
+                            <span class="badge bg-success">
+                                Excellent
+                            </span>
+
+                        {% elif row[1] >= 70 %}
+
+                            <span class="badge bg-primary">
+                                Good
+                            </span>
+
+                        {% elif row[1] >= 50 %}
+
+                            <span class="badge bg-warning">
+                                Average
+                            </span>
+
+                        {% else %}
+
+                            <span class="badge bg-danger">
+                                Needs Improvement
+                            </span>
+
+                        {% endif %}
+
+                    </td>
+
+                </tr>
+
+            {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}

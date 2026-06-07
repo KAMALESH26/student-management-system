@@ -1,0 +1,168 @@
+{% extends "base.html" %}
+
+{% block title %}
+Attendance Report
+{% endblock %}
+
+{% block content %}
+
+<h1 class="page-title">
+    Attendance Analytics
+</h1>
+
+<div class="dashboard-grid">
+
+    <div class="stat-card">
+
+        <h5>
+            Top Attendance
+        </h5>
+
+        <h2>
+            {{ report[0][3] }}%
+        </h2>
+
+    </div>
+
+    <div class="stat-card">
+
+        <h5>
+            Best Student
+        </h5>
+
+        <h2>
+            {{ report[0][0] }}
+        </h2>
+
+    </div>
+
+    <div class="stat-card">
+
+        <h5>
+            Students Tracked
+        </h5>
+
+        <h2>
+            {{ report|length }}
+        </h2>
+
+    </div>
+
+</div>
+
+<div class="glass-card">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <h4>
+            Attendance Ranking
+        </h4>
+
+        <span class="badge bg-primary">
+
+            {{ report|length }}
+            Students
+
+        </span>
+
+    </div>
+
+    <div class="table-responsive">
+
+        <table class="table align-middle">
+
+            <thead>
+
+                <tr>
+
+                    <th>Rank</th>
+
+                    <th>Student</th>
+
+                    <th>Present Days</th>
+
+                    <th>Total Days</th>
+
+                    <th>Attendance %</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+            {% for row in report %}
+
+                <tr>
+
+                    <td>
+
+                        {% if loop.index == 1 %}
+
+                            🥇
+
+                        {% elif loop.index == 2 %}
+
+                            🥈
+
+                        {% elif loop.index == 3 %}
+
+                            🥉
+
+                        {% else %}
+
+                            #{{ loop.index }}
+
+                        {% endif %}
+
+                    </td>
+
+                    <td>
+                        {{ row[0] }}
+                    </td>
+
+                    <td>
+                        {{ row[1] }}
+                    </td>
+
+                    <td>
+                        {{ row[2] }}
+                    </td>
+
+                    <td>
+
+                        {% if row[3] >= 75 %}
+
+                            <span class="badge bg-success">
+                                {{ row[3] }}%
+                            </span>
+
+                        {% elif row[3] >= 50 %}
+
+                            <span class="badge bg-warning">
+                                {{ row[3] }}%
+                            </span>
+
+                        {% else %}
+
+                            <span class="badge bg-danger">
+                                {{ row[3] }}%
+                            </span>
+
+                        {% endif %}
+
+                    </td>
+
+                </tr>
+
+            {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,252 @@
+{% extends "base.html" %}
+
+{% block title %}
+Marks Analytics
+{% endblock %}
+
+{% block content %}
+
+<h1 class="page-title">
+    Marks Analytics
+</h1>
+
+<div class="dashboard-grid">
+
+    <div class="stat-card">
+
+        <h5>
+            🏆 Top Scorer
+        </h5>
+
+        <h2>
+
+            {% if top_scorer %}
+                {{ top_scorer[0] }}
+            {% else %}
+                N/A
+            {% endif %}
+
+        </h2>
+
+    </div>
+
+    <div class="stat-card">
+
+        <h5>
+            📊 Class Average
+        </h5>
+
+        <h2>
+            {{ class_average }}
+        </h2>
+
+    </div>
+
+    <div class="stat-card">
+
+        <h5>
+            👥 Students Evaluated
+        </h5>
+
+        <h2>
+            {{ students_evaluated }}
+        </h2>
+
+    </div>
+
+</div>
+
+<div class="glass-card mb-4">
+
+    <h4 class="mb-4">
+        Performance Leaderboard
+    </h4>
+
+    <div class="table-responsive">
+
+        <table class="table">
+
+            <thead>
+
+                <tr>
+
+                    <th>Rank</th>
+                    <th>Student</th>
+                    <th>Average Marks</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for student in report %}
+
+                <tr>
+
+                    <td>
+
+                        {% if loop.index == 1 %}
+
+                            🥇
+
+                        {% elif loop.index == 2 %}
+
+                            🥈
+
+                        {% elif loop.index == 3 %}
+
+                            🥉
+
+                        {% else %}
+
+                            #{{ loop.index }}
+
+                        {% endif %}
+
+                    </td>
+
+                    <td>
+                        {{ student[0] }}
+                    </td>
+
+                    <td>
+
+                        {% if student[1] >= 85 %}
+
+                            <span class="badge bg-success">
+
+                                {{ student[1] }}
+
+                            </span>
+
+                        {% elif student[1] >= 70 %}
+
+                            <span class="badge bg-primary">
+
+                                {{ student[1] }}
+
+                            </span>
+
+                        {% elif student[1] >= 50 %}
+
+                            <span class="badge bg-warning">
+
+                                {{ student[1] }}
+
+                            </span>
+
+                        {% else %}
+
+                            <span class="badge bg-danger">
+
+                                {{ student[1] }}
+
+                            </span>
+
+                        {% endif %}
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+<div class="glass-card">
+
+    <h4 class="mb-4">
+        Top Student Performance
+    </h4>
+
+    <canvas id="marksAnalyticsChart"></canvas>
+
+</div>
+
+<script>
+
+const labels = [
+{% for student in report %}
+"{{ student[0] }}",
+{% endfor %}
+];
+
+const marks = [
+{% for student in report %}
+{{ student[1] }},
+{% endfor %}
+];
+
+new Chart(
+    document.getElementById("marksAnalyticsChart"),
+    {
+        type: "bar",
+
+        data: {
+
+            labels: labels,
+
+            datasets: [{
+
+                label: "Average Marks",
+
+                data: marks,
+
+                backgroundColor: "#3B82F6"
+
+            }]
+        },
+
+        options: {
+
+            responsive: true,
+
+            plugins: {
+
+                legend: {
+
+                    labels: {
+
+                        color: "#E2E8F0"
+                    }
+                }
+            },
+
+            scales: {
+
+                y: {
+
+                    ticks: {
+                        color: "#E2E8F0"
+                    },
+
+                    grid: {
+                        color: "#334155"
+                    }
+                },
+
+                x: {
+
+                    ticks: {
+                        color: "#E2E8F0"
+                    },
+
+                    grid: {
+                        color: "#334155"
+                    }
+                }
+            }
+        }
+    }
+);
+
+</script>
+
+{% endblock %}

@@ -1,0 +1,296 @@
+{% extends "base.html" %}
+
+{% block title %}
+Student Profile
+{% endblock %}
+
+{% block content %}
+
+<div class="glass-card mb-4">
+
+    <div class="d-flex justify-content-between align-items-center">
+
+        <div>
+
+            <h1 class="mb-2">
+                👤 {{ student[2] }}
+            </h1>
+
+            <p class="text-secondary mb-0">
+
+                {{ student[3] }}
+                •
+                Year {{ student[4] }}
+
+            </p>
+
+        </div>
+
+        <div>
+
+            <a href="/student/{{ student[0] }}/pdf"
+               class="btn btn-primary">
+
+                📄 Download Report
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="dashboard-grid">
+
+    <div class="stat-card">
+
+        <h5>
+            📅 Attendance
+        </h5>
+
+        <h2>
+            {{ attendance_percentage }}%
+        </h2>
+
+    </div>
+
+    <div class="stat-card">
+
+        <h5>
+            📝 Average Marks
+        </h5>
+
+        <h2>
+            {{ average_marks }}
+        </h2>
+
+    </div>
+
+</div>
+
+<div class="stat-card">
+
+    <h5>
+        📚 Subjects
+    </h5>
+
+    <h2>
+        {{ total_subjects }}
+    </h2>
+
+</div>
+
+<div class="glass-card mb-4">
+
+    <h4 class="mb-4">
+        Student Information
+    </h4>
+
+    <div class="row">
+
+    <div class="col-md-6 mb-3">
+
+        <strong>Register No</strong>
+
+        <div>
+            {{ student[1] }}
+        </div>
+
+    </div>
+
+    <div class="col-md-6 mb-3">
+
+        <strong>Department</strong>
+
+        <div>
+            {{ student[3] }}
+        </div>
+
+    </div>
+
+    <div class="col-md-6 mb-3">
+
+        <strong>Email</strong>
+
+        <div>
+            {{ student[5] }}
+        </div>
+
+    </div>
+
+    <div class="col-md-6 mb-3">
+
+        <strong>Phone</strong>
+
+        <div>
+            {{ student[6] }}
+        </div>
+
+    </div>
+
+</div>
+
+    <p><strong>Department:</strong> {{ student[3] }}</p>
+
+    <p><strong>Year:</strong> {{ student[4] }}</p>
+
+    <p><strong>Email:</strong> {{ student[5] }}</p>
+
+    <p><strong>Phone:</strong> {{ student[6] }}</p>
+
+</div>
+
+<div class="glass-card mb-4">
+
+    <h4 class="mb-4">
+        Attendance Analysis
+    </h4>
+
+    <canvas id="attendanceChart"></canvas>
+
+</div>
+
+<div class="glass-card">
+
+    <h4 class="mb-4">
+        Subject Marks
+    </h4>
+
+    <table class="table">
+
+        <thead>
+
+            <tr>
+
+                <th>Subject</th>
+
+                <th>Marks</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+        {% for mark in marks_data %}
+
+            <tr>
+
+                <td>
+                    {{ mark[0] }}
+                </td>
+
+                <td>
+
+{% if mark[1] >= 85 %}
+
+<span class="badge bg-success">
+
+    {{ mark[1] }}
+
+</span>
+
+{% elif mark[1] >= 70 %}
+
+<span class="badge bg-primary">
+
+    {{ mark[1] }}
+
+</span>
+
+{% elif mark[1] >= 50 %}
+
+<span class="badge bg-warning">
+
+    {{ mark[1] }}
+
+</span>
+
+{% else %}
+
+<span class="badge bg-danger">
+
+    {{ mark[1] }}
+
+</span>
+
+{% endif %}
+
+</td>
+
+            </tr>
+
+        {% endfor %}
+
+        </tbody>
+
+    </table>
+
+    <div class="glass-card mt-4">
+
+        <h4 class="mb-4">
+            Marks Analysis
+        </h4>
+
+        <canvas id="studentMarksChart"></canvas>
+
+    </div>
+
+</div>
+
+<script>
+
+const subjects = {{ subjects | tojson }};
+const marks = {{ marks_values | tojson }};
+
+new Chart(
+    document.getElementById("studentMarksChart"),
+    {
+        type: "bar",
+
+        data: {
+            labels: subjects,
+
+            datasets: [{
+                label: "Marks",
+                data: marks,
+                backgroundColor: "#3B82F6"
+            }]
+        },
+
+        options: {
+            responsive: true
+        }
+    }
+);
+
+</script>
+
+<script>
+new Chart(
+    document.getElementById("attendanceChart"),
+    {
+        type: "doughnut",
+
+        data: {
+            labels: ["Present", "Absent"],
+
+            datasets: [{
+
+                data: [
+                    {{ present_count }},
+                    {{ absent_count }}
+                ],
+
+                backgroundColor: [
+                    "#10B981",
+                    "#EF4444"
+                ]
+            }]
+        }
+    }
+);
+</script>
+
+{% endblock %}  
